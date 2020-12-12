@@ -10,7 +10,7 @@ export default function OnBoardingScreen({data}){
       return(
           <View style={styles.main}>
             <View style={{width : width}}>
-              <TouchableOpacity style={{padding : 10}}>
+              <TouchableOpacity style={{padding : 10}} onPress={()=>navigation.navigate('Home')}>
                 <Text style={{textAlign : 'right', color : 'blue'}}>Skip</Text>
               </TouchableOpacity>
             </View>

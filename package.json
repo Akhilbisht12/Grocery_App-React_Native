@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/drawer": "^5.11.4",
     "@react-navigation/native": "^5.8.10",
@@ -23,8 +24,10 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.0",
+    "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
-    "react-native-webview": "^11.0.0"
+    "react-native-webview": "^11.0.0",
+    "react-native-woocommerce-api": "^1.8.5"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
