@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Dimensions, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import WooCommerce from '../Components/WooCommerce';
+import WooCommerce from '../../Components/WooCommerce';
+import Loader from '../../Components/Loader';
 
  export default function Login({navigation}) {
      const [email, setEmail] = useState('');
@@ -29,11 +30,10 @@ import WooCommerce from '../Components/WooCommerce';
             billing: {
               first_name: name.split(' ')[0],
               last_name: name.split(' ')[1],
-              company: "",
+              company: password,
               address_1: flat,
               address_2: street,
-              landmark : landmark,
-              city: "Dehradun",
+              city: landmark,
               state: "Uttrakhand",
               postcode: "",
               country: "India",
@@ -46,8 +46,7 @@ import WooCommerce from '../Components/WooCommerce';
               company: "",
               address_1: flat,
               address_2: street,
-              landmark : landmark,
-              city: 'Dehradun',
+              city: landmark,
               state: "Uttrakhand",
               postcode: "",
               country: "India"
@@ -57,7 +56,8 @@ import WooCommerce from '../Components/WooCommerce';
           WooCommerce.post("customers", data)
             .then((response) => {
               AsyncStorage.setItem('user', JSON.stringify(response));
-              navigation.navigate('Home');
+              AsyncStorage.setItem('cart', JSON.stringify([]));
+              navigation.navigate('ScreenOne');
               setLoading(false);
             })
             .catch((error) => {
@@ -70,45 +70,46 @@ import WooCommerce from '../Components/WooCommerce';
      if(next){
         return(
             <View style={styles.main}>
-                <Icon name='opencart' size={50}/>
-                <Text style={{fontSize : 40}}>Welcome</Text>
-                <Text>Sign in to continue</Text>
-                <TextInput style={styles.input} placeholder='Enter your email here' value={email} 
-                onChangeText={(text)=>setEmail(text)}/>
+                <View style={{alignItems : 'center'}}>
+                    <Icon name='opencart' color={'#62BA03'} size={50}/>
+                    <Text style={{fontSize : 40}}>Welcome</Text>
+                    <Text>Sign Up to continue</Text>
+                </View>
+                <View>
+                    <TextInput style={styles.input} placeholder='Enter your email here' placeholderTextColor={'grey'} value={email} 
+                    onChangeText={(text)=>setEmail(text)}/>
 
-                <TextInput style={styles.input} placeholder='Enter your password here'
-                value={password} onChangeText={(text)=>setPassword(text)}/>
+                    <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Enter your password here'
+                    value={password} onChangeText={(text)=>setPassword(text)}/>
+                </View>
                 <TouchableOpacity style={styles.btn} onPress={()=>{
                     if(email!='' && password!='')setNext(false)
                     else alert('Fill Out Details')
                     }}>
                     <Text style={{color : 'white'}}>Next</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
-                    <Text>skip</Text>
+                <TouchableOpacity style={{flexDirection : 'row'}} onPress={()=>navigation.navigate('Login')}>
+                    <Text>Already have a account?</Text>
+                    <Text style={{color : '#62BA03', fontWeight : 'bold'}}> Sign In</Text>
                 </TouchableOpacity>
             </View>
         )
     }else if(loading){
-        return(
-            <View style={styles.main}>
-                <ActivityIndicator/>
-            </View>
-        )
+        return <Loader/>
         }else {
             return(
                 <View style={styles.main}>
                     <View style={styles.pad}>
-                        <Text>Fill Details For Your Orders</Text>
-                        <TextInput style={styles.input} placeholder='Full Name' value={name} 
+                        <Text style={{fontSize : 30 }}>Fill Details For Your Orders</Text>
+                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Full Name' value={name} 
                             onChangeText={(text)=>setName(text)}/>
-                        <TextInput style={styles.input} placeholder='Flat, House no' value={flat} 
+                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Flat, House no' value={flat} 
                             onChangeText={(text)=>setFlat(text)}/>
-                        <TextInput style={styles.input} placeholder='Area, Colony, Street Name' value={street} 
+                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Area, Colony, Street Name' value={street} 
                             onChangeText={(text)=>setStreet(text)}/>
-                        <TextInput style={styles.input} placeholder='Landmark' value={landmark} 
+                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Landmark' value={landmark} 
                             onChangeText={(text)=>setLandmark(text)}/>
-                        <TextInput style={styles.input} placeholder='Mobile Number' value={mobile} 
+                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Mobile Number' value={mobile} 
                             onChangeText={(text)=>setMobile(text)}/>
                         <TouchableOpacity style={styles.btn} onPress={handleSignUp}>
                             <Text style={{color : 'white', textAlign : 'center' }}>Sign Up</Text>
@@ -122,17 +123,22 @@ import WooCommerce from '../Components/WooCommerce';
  const styles = StyleSheet.create({
      main : {
          flex : 1,
-         justifyContent : 'center',
-         alignItems : 'center'
+         justifyContent : 'space-evenly',
+         alignItems : 'center',
+         marginTop : StatusBar.currentHeight,
+         marginBottom : StatusBar.currentHeight
      },
      input : {
-         borderBottomWidth : 1,
-         borderColor : 'black',
-         width : Dimensions.get('window').width - 100,
-         marginVertical : 20
+         borderWidth : 1,
+         borderColor : 'lightgrey',
+         width : Dimensions.get('window').width - 50,
+         marginVertical : 5,
+         paddingHorizontal : 10,
+         paddingVertical : 5,
+         borderRadius : 5
      },
      btn : {
-         backgroundColor : '#0890c2',
+         backgroundColor : '#62BA03',
          paddingHorizontal : 50,
          paddingVertical : 10,
          borderRadius : 10,
@@ -140,13 +146,14 @@ import WooCommerce from '../Components/WooCommerce';
          borderTopWidth : 0.5,
          borderLeftWidth : 1,
          borderRightWidth : 1,
-         borderColor : '#055b7a',
+         borderColor : '#428000',
+         width : Dimensions.get('window').width -50,
+         alignItems :'center'
      },
      pad : {
          margin : 5,
          paddingVertical : 40,
          paddingHorizontal : 20,
-         backgroundColor : 'lightgrey',
          borderRadius : 20
 
      }

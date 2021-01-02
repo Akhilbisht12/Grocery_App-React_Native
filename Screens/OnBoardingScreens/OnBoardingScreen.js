@@ -11,7 +11,7 @@ export default function OnBoardingScreen({data}){
           <View style={styles.main}>
             <View style={{width : width}}>
               <TouchableOpacity style={{padding : 10}} onPress={()=>navigation.navigate('Home')}>
-                <Text style={{textAlign : 'right', color : 'blue'}}>Skip</Text>
+                <Text style={{textAlign : 'right', color : '#62BA03'}}>Skip</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.submain}>
@@ -23,11 +23,11 @@ export default function OnBoardingScreen({data}){
             <View style={{flexDirection : 'row', justifyContent : 'space-between', width : width, paddingHorizontal : 20}}>
               <View style={{flexDirection : 'row', alignItems : 'center'}}>
                 <TouchableOpacity
-                 style={{backgroundColor : 'blue', padding : data.a, borderRadius : 20 , width : data.a, marginHorizontal : 2}}/>
+                 style={{backgroundColor : '#62BA03', padding : data.a, borderRadius : 20 , width : data.a, marginHorizontal : 2}}/>
                  <TouchableOpacity
-                 style={{backgroundColor : 'blue', padding : data.b, borderRadius : 20 , width : data.b, marginHorizontal : 2}}/>
+                 style={{backgroundColor : '#62BA03', padding : data.b, borderRadius : 20 , width : data.b, marginHorizontal : 2}}/>
                  <TouchableOpacity
-                 style={{backgroundColor : 'blue', padding : data.c, borderRadius : 20 , width : data.c, marginHorizontal : 2}}/>
+                 style={{backgroundColor : '#62BA03', padding : data.c, borderRadius : 20 , width : data.c, marginHorizontal : 2}}/>
               </View>
               <View>
                 <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate(data.navigate)}>
@@ -55,18 +55,21 @@ const styles = StyleSheet.create({
     width : width-100
     },
   mainHead : {
-    fontSize : 30,
+    fontSize : 32,
     marginTop : 50,
-    marginBottom : 10
+    marginBottom : 5,
+    color : '#62BA03',
+    fontWeight : '600'
   },
   subHead : {
     fontSize : 20,
     textAlign : 'center',
-    paddingHorizontal : 10
+    paddingHorizontal : 10,
+    color : 'grey'
   },
   btn : {
     borderRadius : 100,
-    backgroundColor : 'blue',
+    backgroundColor : '#62BA03',
     paddingHorizontal : 15,
     paddingVertical : 2
   }

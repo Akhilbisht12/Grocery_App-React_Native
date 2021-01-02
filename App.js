@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerNavigator from './navigators/DrawerNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 export default function App() {

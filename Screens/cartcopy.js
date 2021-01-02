@@ -66,8 +66,7 @@ export default function Cart() {
     }
 
     if(loading){
-        return <ActivityIndicator/>
-    }else{
+        return <Loader/>
         return (
             <ScrollView style={styles.scroll}>
                 <Text style={styles.head}>My Shopping Cart</Text>
@@ -108,6 +107,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CartComp from '../Components/CartComp';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import WooCommerce from '../Components/WooCommerce'
+import Loader from '../Components/Loader';
 
 export default function Cart() {
     var sum =0;

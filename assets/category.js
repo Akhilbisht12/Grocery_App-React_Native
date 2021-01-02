@@ -146,7 +146,7 @@ const categoryData = [
             id : 123,
             data : [
             {
-                name : 'Mens Grooming',
+                name : "Men's Grooming",
                 image : 'http://gms.upgrate.in/wp-content/uploads/2020/12/Men-Grooming.png',
                 id : 27
             },
@@ -181,7 +181,7 @@ const categoryData = [
                 id : 33
             },
             {
-                name :  'Womens Grooming',
+                name :  "Women's Groomin",
                 image : 'http://gms.upgrate.in/wp-content/uploads/2020/12/Womens-Grooming.png',
                 id : 34
             },
@@ -200,3 +200,107 @@ const categoryData = [
 ]
 
 export default categoryData;
+
+{categoryData.map((item)=>{
+    cart.push(<Text
+    key={item.id}
+        style={{width : width, fontSize : 30, textAlign : 'center', backgroundColor : 'blue', color : 'white', fontWeight : 'bold', marginVertical : 10}}>
+            {item.name}</Text>)
+    item.data.map((element)=>{
+        cart.push(<TouchableOpacity key={element.id} onPress={()=>navigation.navigate('CatProducts', {cat : element.name})}>
+                    <Category style={{}} url={element.image} title={element.name}/>
+                </TouchableOpacity>)
+    })
+})}
+{cart}
+
+const temp = {
+    name : data.name,
+    image : image,
+    price : data.price,
+    key : data.id,
+    quantity : 1
+
+}
+AsyncStorage.getItem('cart')
+.then((cartData)=>{
+    console.log(cartData)
+    var temp2 = JSON.parse(cartData);
+    if(temp2!==null){
+        if(temp2.includes((element)=>element.key===item.id)){
+            ToastAndroid.show('Already In Cart')
+            ToastAndroid.SHORT;
+        }
+        else{
+            temp2.push(temp)
+            AsyncStorage.setItem('cart', JSON.stringify(temp2))
+        }
+    }else{
+        const initCart =[];
+        initCart.push(temp);
+        AsyncStorage.setItem('cart', JSON.stringify(initCart));
+    }
+    ToastAndroid.show('added Succesfluuy')
+    ToastAndroid.SHORT;
+})
+.catch((err)=>console.log(err))
+}
+
+
+
+{data.map((item)=> {
+    if(item){
+        return(item.images.map((image)=>{
+        return(<ProductComp key={item.id} item={item} image={image.src}/>);
+    }))}
+})}
+
+
+if(response.data.status === 400){
+    alert(response.data.params.email)
+}
+else if(response[0].billing.company === password){
+    navigation.navigate('Home')
+}else if(response.length === 0){
+    alert('No User Found')
+}else{
+    alert('invalid Password')
+}
+})
+
+<Drawer.Screen name='Cart' component={Cart}
+            options={{
+            title: 'Cart',
+            drawerIcon: () => (
+                <Icon
+                name="shopping-cart"
+                size={20}
+                color={'#62BA03'}
+                />
+            ),
+            }}/>
+            <Drawer.Screen name='My orders' component={MyOrders}
+            options={{
+                title: 'My Orders',
+                drawerIcon: () => (
+                    <Icon
+                    name="box"
+                    size={20}
+                    color={'#62BA03'}
+                    />
+                ),
+                }}/>
+            <Drawer.Screen name='Logout' component={StackNavigator}
+            options={{
+                title: 'Logout',
+                drawerIcon: () => (
+                    <Icon
+                    name="user-slash"
+                    size={20}
+                    color={'#62BA03'}
+                    />
+                ),
+                }}/>
+
+
+                
