@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Linking } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { useSafeArea } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -56,7 +56,7 @@ export default function Login({navigation}) {
                 <View>
                     <TextInput value={email} onChangeText={(text)=>setEmail(text)} placeholder='Email' placeholderTextColor='grey' style={styles.input}/>
                     <TextInput value={password} onChangeText={(text)=>setPassword(text)} placeholder='Password' placeholderTextColor='grey' style={styles.input}/>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>Linking.openURL('https://gms.upgrate.in/my-account/lost-password/')}>
                         <Text style={{textAlign : 'right', color : '#62BA03'}}>Forgot Password</Text>
                     </TouchableOpacity>
                 </View>

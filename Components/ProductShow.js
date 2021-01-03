@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import WooCommerce from '../Components/WooCommerce';
 import ProductComp from './ProductComp';
-import Loader from '../Components/Loader'
+import ProductLoader from '../Loaders/ProductLoader'
 
 
 export default function ProductShow() {
@@ -24,7 +24,7 @@ export default function ProductShow() {
           });
     },[])
     if(loading){
-        return <Loader/>
+        return <ProductLoader/>
     }else{
     return (
         <View style={{alignItems : 'center'}}>

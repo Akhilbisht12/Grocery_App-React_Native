@@ -11,13 +11,18 @@ export default function CustomDrawer(props) {
     useEffect(()=>{
         AsyncStorage.getItem('user')
         .then((res)=>{
-            console.log(res)
             if(res!==null){
                 setUser(JSON.parse(res))
             }
             setLoading(false)
         })
     },[])
+    const handleLogout = () => {
+        AsyncStorage.setItem('user', JSON.stringify([]))
+        .then((res)=>{
+            props.navigation.navigate('Login')
+        })
+    }
     if(loading){
         return <Loader/>
     }else{
@@ -54,6 +59,13 @@ export default function CustomDrawer(props) {
                             )}
                             label='Cart'
                             onPress={()=>{props.navigation.navigate('Cart')}}
+                            />
+                            <DrawerItem
+                            icon={()=>(
+                                <Icon name='user-slash' color='#62BA03' size={20}/>
+                            )}
+                            label='Logout'
+                            onPress={()=>{handleLogout()}}
                             />
                         </View>
                     </View>

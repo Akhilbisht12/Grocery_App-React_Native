@@ -19,7 +19,6 @@ import Loader from '../../Components/Loader';
 
      const handleSignUp = ()=>{
          setLoading(true);
-         console.log('hit')
          if(name!='' && street!='' && flat!='' && landmark!='' &&mobile!=''){
         const data = {
             email: email,
@@ -61,7 +60,6 @@ import Loader from '../../Components/Loader';
               setLoading(false);
             })
             .catch((error) => {
-              console.log(error.response);
               setLoading(false);
               alert('Something Went Wrong')
             });

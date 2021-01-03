@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, Dimensions, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native'
-import Carousel from '../Components/Carousel';
 import Header from '../Components/Header';
 import ProductShow from '../Components/ProductShow'
 import { useNavigation } from '@react-navigation/native';

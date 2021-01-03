@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, StatusBar, Text, View } from 'react-native';
 import WooCommerce from '../Components/WooCommerce';
 import ProductComp from '../Components/ProductComp'
-import Loader from '../Components/Loader';
+import ProductLoader from '../Loaders/ProductLoader';
 
 export default function CatProducts({route}) {
     const id = route.params.id
@@ -18,7 +18,12 @@ export default function CatProducts({route}) {
             setLoading(false)
         })
     },[])
-    if(loading) return <Loader/>
+    if(loading) return(
+        <View>
+            <ProductLoader/>
+            <ProductLoader/>
+        </View>
+    )
     else{
         return (
             <ScrollView style={{marginTop : StatusBar.currentHeight}}>

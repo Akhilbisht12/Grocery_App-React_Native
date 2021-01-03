@@ -42,7 +42,6 @@ export default function Cart({navigation}) {
     }
 
     const handleTrash = (i) => {
-        console.log(i)
         var temp = [...cart];
         temp.splice(i,1);
         setCart(temp)
@@ -102,14 +101,12 @@ export default function Cart({navigation}) {
           
           WooCommerce.post("orders", data)
             .then((response) => {
-              console.log(response);
               setCart([])
               setStep(1)
               AsyncStorage.setItem('cart', JSON.stringify([]))
               Alert.alert('Order Successful', 'Thank You For Your Order')
             })
             .catch((error) => {
-              console.log(error.response);
               alert(error.response)
             });
           

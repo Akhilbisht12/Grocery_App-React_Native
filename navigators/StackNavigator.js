@@ -3,16 +3,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../Screens/Home";
 import SignUp from "../Screens/Auth/SignUp";
 import Login from '../Screens/Auth/Login'
-import WebComp from '../Screens/WebComp';
 import Cart from '../Screens/Cart';
 import OnBoardingScreen from '../Screens/OnBoardingScreens/OnBoardingScreen';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useSafeArea } from "react-native-safe-area-context";
 import { ActivityIndicator } from "react-native";
 import CatProducts from '../Screens/CatProducts';
 import SingleOrder from "../Screens/SingleOrder";
 import Search from "../Screens/Search";
 import MyOrders from "../Screens/MyOrders";
+import CategoryDetailed from "../Screens/CategoryDetailed";
 
 const data = {
   screenOne : {
@@ -56,10 +55,6 @@ function ScreenOne(){
   return <OnBoardingScreen data={data.screenThree}/>
 }
 
-function HomeCall (){
-  return <WebComp url = 'https://gms.upgrate.in/'/>
-}
-
 
 export default function StackNavigator() {
   const [ loading, setLoading] = useState(true)
@@ -82,7 +77,6 @@ else{
         <Stack.Screen name='ScreenOne' component={ScreenOne}/>
         <Stack.Screen name='ScreenTwo' component={ScreenTwo}/>
         <Stack.Screen name='ScreenThree' component={ScreenThree}/>
-        <Stack.Screen name="WebView" component={HomeCall} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Signup" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
@@ -91,6 +85,7 @@ else{
         <Stack.Screen name="SingleOrder" component={SingleOrder} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="MyOrders" component={MyOrders} />
+        <Stack.Screen name="CategoryDetailed" component={CategoryDetailed} />
       </Stack.Navigator>
     )
   }
