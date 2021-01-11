@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GSM",
-    "slug": "GSM",
+    "name": "Ganesh Supermarket",
+    "slug": "ganesh-supermarket",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.akhil83.GSM"
+      "package": "com.akhil83.GSM",
     },
     "web": {
       "favicon": "./assets/icon.png"

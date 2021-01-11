@@ -7,7 +7,7 @@ export default function CategoryDetailed({route}) {
     const navigation = useNavigation();
     const item = route.params.item
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor : 'white'}}>
             <View style={{flexDirection : 'row', flexWrap : 'wrap', justifyContent :'center', paddingVertical : 20}}>
                 {item.map((item)=>{
                     var i = item.image.src.split('.')
