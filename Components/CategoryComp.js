@@ -4,6 +4,7 @@ import WooCommerce from '../Components/WooCommerce'
 import Category from '../Components/Category'
 import { useNavigation } from '@react-navigation/native';
 import CategoryLoader from '../Loaders/CategoryLoader'
+import  Icon  from 'react-native-vector-icons/FontAwesome';
 
 export default function CategoryComp() {
     const navigation = useNavigation();
@@ -86,7 +87,7 @@ export default function CategoryComp() {
                         {breverages.slice(0,6)}
                     </View>
                     <View style={styles.head}>
-                        <Text style={styles.CatHead}>Homecare</Text>
+                        <Text style={styles.CatHead}>Home Care</Text>
                         <TouchableOpacity style={styles.seeAll} onPress={()=>navigation.navigate('CategoryDetailed', {item : homecare1})}>
                             <Text style={{color : 'white'}}>View All</Text>
                         </TouchableOpacity>

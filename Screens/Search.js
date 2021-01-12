@@ -53,7 +53,7 @@ export default function Search() {
                     </TouchableOpacity>
                 </View>
                 <ScrollView style={{marginBottom : StatusBar.currentHeight*2}}>
-                    <View style={{flexWrap : 'wrap', alignItems : 'center', flexDirection : 'row', alignItems :'center'}}>
+                    <View style={{flexWrap : 'wrap', justifyContent : 'center', flexDirection : 'row'}}>
                         {products.map((item)=>{
                             return item.images.map((image)=>{
                                 return(<ProductComp key={item.id} item={item} image={image.src}/>)

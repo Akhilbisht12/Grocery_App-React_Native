@@ -20,7 +20,6 @@ export default function MyOrders({navigation}) {
             .then((response) => {
                 setOrders(response)
                 setLoading(false)
-            console.log(response);
             })
             .catch((error) => {
                 console.log(error.response.data);
@@ -29,9 +28,10 @@ export default function MyOrders({navigation}) {
     }, [])
 
     const identifyStatus = ({item}) =>{
-        if(item.status === 'pending') return <Text style={[styles.btn, {backgroundColor : 'orange'}]}>{item.status}</Text>
-        else if(item.status === 'processing') return <Text style={[styles.btn, {backgroundColor : '#3399ff'}]}>{item.status}</Text>
-        if(item.status === 'completed') return <Text style={[styles.btn, {backgroundColor : '#62BA03'}]}>{item.status}</Text>
+        if(item.status === 'pending' || item.status==='on-hold') return <Text style={[styles.btn, {backgroundColor : 'orange'}]}>{item.status}</Text>
+        else if(item.status === 'processing' || item.status==='refunded') return <Text style={[styles.btn, {backgroundColor : '#3399ff'}]}>{item.status}</Text>
+        else if(item.status === 'completed') return <Text style={[styles.btn, {backgroundColor : '#62BA03'}]}>{item.status}</Text>
+        else if(item.status === 'failed' || item.status === 'cancelled') return <Text style={[styles.btn, {backgroundColor : '#ff3300'}]}>{item.status}</Text>
     }
     if(loading){
         return <Loader/>

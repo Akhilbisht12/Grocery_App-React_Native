@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../Screens/Home";
 import SignUp from "../Screens/Auth/SignUp";
 import Login from '../Screens/Auth/Login'
+import MyAccount from '../Screens/Auth/MyAccount'
 import Cart from '../Screens/Cart';
 import OnBoardingScreen from '../Screens/OnBoardingScreens/OnBoardingScreen';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -80,6 +81,7 @@ else{
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Signup" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="MyAccount" component={MyAccount} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="CatProducts" component={CatProducts} />
         <Stack.Screen name="SingleOrder" component={SingleOrder} />

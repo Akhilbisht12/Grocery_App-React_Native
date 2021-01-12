@@ -12,6 +12,7 @@ export default function Cart({navigation}) {
     const [step, setStep] = useState(1);
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isCheckout, setIsCheckout] = useState(false);
     const [user, setUser] = useState();
     useEffect(()=>{
         AsyncStorage.getItem('cart')
@@ -51,7 +52,7 @@ export default function Cart({navigation}) {
     const calculateTotal = () => {
         var sum =0;
         cart.forEach(element => {
-            sum = sum + (element.price*element.quantity)
+            sum = sum + (element.regular_price*element.quantity)
         });
         return parseFloat(sum).toFixed(2)
     }
@@ -59,7 +60,6 @@ export default function Cart({navigation}) {
         var save =0;
         cart.forEach(element => {
             if(element.sale_price){
-                console.log(element.regular_price, element.sale_price, save)
                 save = save + ((element.regular_price - element.sale_price)*element.quantity)
             }
         });
@@ -76,7 +76,18 @@ export default function Cart({navigation}) {
         }
     }
 
+    const checkMinOrder = () =>{
+        if(calculateTotal()-calculateSavings()>=500){
+            handlePlaceOrder();
+        }else{
+            Alert.alert('Checkout Error', 'Minimum order should be greater than ₹ 500')
+        }
+    }
+
     const handlePlaceOrder =()=>{
+        setIsCheckout(true)
+        setLoading(true)
+        if(isCheckout){
         const products =[];
         cart.map((item)=>products.push({
             product_id : item.id,
@@ -105,11 +116,13 @@ export default function Cart({navigation}) {
               setStep(1)
               AsyncStorage.setItem('cart', JSON.stringify([]))
               Alert.alert('Order Successful', 'Thank You For Your Order')
+              setLoading(false)
+              setIsCheckout(false)
             })
             .catch((error) => {
               alert(error.response)
             });
-          
+        }
     }
 
     const handleCartFlush = () => {
@@ -118,21 +131,28 @@ export default function Cart({navigation}) {
     }
 
     const handleUpdate = () => {
-        const dataup = {
+        const data = {
+            email : user.email,
+            first_name: user.first_name,
+            last_name : user.last_name,
             billing: {
-              address_1: user.billing.address_1,
-              address_2 : user.billing.address_2,
-              city : user.billing.city,
-              phone : user.billing.mobile
+                first_name: user.first_name,
+                last_name : user.last_name,
+                phone : user.billing.phone,
+                address_1 : user.shipping.address_1,
+                address_2 : user.shipping.address_2,
+                city : user.shipping.city
             },
             shipping: {
-                address_1: user.billing.address_1,
-                address_2 : user.billing.address_2,
-                city : user.billing.city,
+                first_name: user.first_name,
+                last_name : user.last_name,
+                address_1 : user.shipping.address_1,
+                address_2 : user.shipping.address_2,
+                city : user.shipping.city
             }
           };
           
-          WooCommerce.put(`customers/${user.id}`, dataup)
+          WooCommerce.put(`customers/${user.id}`, data)
             .then((response) => {
               console.log(response);
               AsyncStorage.setItem('user', JSON.stringify(user))
@@ -229,7 +249,7 @@ export default function Cart({navigation}) {
                             </View>
                             <View style={styles.orderDetails}>
                                 <Text style={{color : '#62BA03', fontSize : 20, fontWeight : 'bold'}}>Grand Total</Text>
-                                <Text style={{color : '#62BA03', fontSize : 20, fontWeight : 'bold'}}>{calculateTotal()}</Text>
+                                <Text style={{color : '#62BA03', fontSize : 20, fontWeight : 'bold'}}>₹ { calculateTotal()-calculateSavings()}</Text>
                             </View>
                         </View>
                         <View style={styles.cont}>
@@ -248,27 +268,66 @@ export default function Cart({navigation}) {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.btn} onPress={handlePlaceOrder}>
+                        <TouchableOpacity style={styles.btn} onPress={checkMinOrder}>
                             <Text style={{color : 'white'}}>Place Order</Text>
                         </TouchableOpacity>
                     </View>
                 )
             }else if(step === 3){
                 return (
-                    <View style={{justifyContent : 'space-evenly', alignItems : 'center'}}>
-                        <Text style={{fontSize : 30 }}>Fill Details For Your Orders</Text>
-                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Flat, House no'
-                            onChangeText={(text)=>{user.shipping.address_1=text}}/>
-                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Area, Colony, Street Name'
-                            onChangeText={(text)=>{user.shipping.address_2=text}}/>
-                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Landmark'
-                            onChangeText={(text)=>{user.shipping.city=text}}/>
-                        <TextInput placeholderTextColor={'grey'} style={styles.input} placeholder='Mobile Number'
-                            onChangeText={(text)=>{user.billing.mobile=text}}/>
-                        <TouchableOpacity style={styles.btn} onPress={handleUpdate}>
-                            <Text style={{color : 'white' }}>Save Details</Text>
-                        </TouchableOpacity>
-                    </View>  
+                    <ScrollView style={{flex : 1}}>
+            <View style={{flexDirection : 'row', paddingHorizontal : 20, alignItems : 'center', paddingVertical : 10}}>
+                <TouchableOpacity onPress={()=>setStep(2)}>
+                    <Icon name='arrow-left' size={20} style={{marginRight : 20}}/>
+                </TouchableOpacity>
+                <Text style={{fontSize : 25, fontWeight : 'bold'}}>Shipping Information</Text>
+            </View>
+            <View style={{alignItems : 'center'}}>
+                <View style={styles.textBox}>
+                    <Text style={{color : 'grey', fontWeight : 'bold'}}>Email</Text>
+                    <TextInput placeholder={user.email} onChangeText={(text)=>{
+                        var temp = user;
+                        temp.email = text;
+                        setUser(temp)
+                    }}/>
+                </View>
+                <View style={styles.textBox}>
+                    <Text style={{color : 'grey', fontWeight : 'bold'}}>Phone Number</Text>
+                    <TextInput placeholder={user.billing.phone} onChangeText={(text)=>{
+                        var temp = user;
+                        temp.billing.phone = text;
+                        setUser(temp)
+                    }}/>
+                </View>
+                <View style={styles.textBox}>
+                    <Text style={{color : 'grey', fontWeight : 'bold'}}>Flat / House No.</Text>
+                    <TextInput placeholder={user.shipping.address_1} onChangeText={(text)=>{
+                        var temp = user;
+                        temp.shipping.address_1 = text;
+                        setUser(temp)
+                    }}/>
+                </View>
+                <View style={styles.textBox}>
+                    <Text style={{color : 'grey', fontWeight : 'bold'}}>Area / Locality</Text>
+                    <TextInput placeholder={user.shipping.address_2} onChangeText={(text)=>{
+                        var temp = user;
+                        temp.shipping.address_2 = text;
+                        setUser(temp)
+                    }}/>
+                </View>
+                <View style={styles.textBox}>
+                    <Text style={{color : 'grey', fontWeight : 'bold'}}>Landmark</Text>
+                    <TextInput placeholder={user.shipping.city} onChangeText={(text)=>{
+                        var temp = user;
+                        temp.shipping.city = text;
+                        setUser(temp)
+                    }}/>
+                </View>
+                <TouchableOpacity onPress={handleUpdate} style={{backgroundColor : '#62BA03', width : width-100, paddingVertical : 5, borderRadius : 10, marginTop : 20}}>
+                    <Text style={{color : 'white', fontSize : 20, textAlign : 'center'}}>Update</Text>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>  
                 )
             }
 }
@@ -347,13 +406,17 @@ const styles = StyleSheet.create({
         borderColor : 'lightgrey',
         marginVertical : 20
     },
-    input : {
-        borderWidth : 1,
-        borderColor : 'lightgrey',
-        width : Dimensions.get('window').width - 50,
-        marginVertical : 15,
-        paddingHorizontal : 10,
+    textBox : {
+        flexDirection : 'row',
+        alignItems : 'center',
+        justifyContent : "space-between",
+        backgroundColor : 'white',
+        width : width-25,
+        borderRadius : 5,
         paddingVertical : 5,
-        borderRadius : 5
-    },
+        paddingHorizontal : 15,
+        marginVertical : 10,
+        borderWidth : 1,
+        borderColor : 'lightgrey'
+    }
 })
