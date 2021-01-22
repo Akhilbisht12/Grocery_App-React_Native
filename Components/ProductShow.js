@@ -13,7 +13,9 @@ export default function ProductShow() {
     useEffect(()=>{
         // AsyncStorage.clear();
         WooCommerce.get('products', {
-            per_page : 20
+            per_page : 10,
+            stock_status : 'instock',
+            featured : true
         })
           .then(data => {
               setData(data);

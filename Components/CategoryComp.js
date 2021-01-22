@@ -12,10 +12,13 @@ export default function CategoryComp() {
     var breverages = []
     var homecare = []
     var personalcare = []
+    var misclleneous =[]
     var food1 = [];
     var breverages1 = []
     var homecare1 = []
     var personalcare1 = []
+    var misclleneous1 =[]
+
     const [category, setCategory] = useState();
     const [loading, setLoading] = useState(true);
     useEffect(()=>{
@@ -42,27 +45,28 @@ export default function CategoryComp() {
                        var i = 'http://gms.upgrate.in/wp-content/uploads/2020/12/Pulses-1.jpg'
                    }
                     if(item.parent === 65){
-                        food1.push(item)
                         food.push(
-                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {id : item.id})}>
+                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
                         </TouchableOpacity>)
                     }else if(item.parent === 85){
-                        breverages1.push(item)
                         breverages.push(
-                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {id : item.id})}>
+                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
                         </TouchableOpacity>)
                     }else if(item.parent === 103){
-                        homecare1.push(item)
                         homecare.push(
-                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {id : item.id})}>
+                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
                         </TouchableOpacity>)
                     }else if(item.parent === 95){
-                        personalcare1.push(item)
                         personalcare.push(
-                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {id : item.id,})}>
+                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
+                            <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
+                        </TouchableOpacity>)
+                    }else if(item.parent === 235){
+                        misclleneous.push(
+                        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
                         </TouchableOpacity>)
                     }
@@ -70,39 +74,34 @@ export default function CategoryComp() {
                 <View style={{alignItems :'center'}}>
                     <View style={styles.head}>
                         <Text style={styles.CatHead}>Food</Text>
-                        <TouchableOpacity style={styles.seeAll} onPress={()=>navigation.navigate('CategoryDetailed', {item : food1})}>
-                            <Text style={{color : 'white'}}>View All</Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={styles.CatView}>
-                        {food.slice(0,6)}
+                        {food}
                     </View>
                     <View style={styles.head}>
                         <Text style={styles.CatHead}>Beverages</Text>
-                        <TouchableOpacity style={styles.seeAll} onPress={()=>navigation.navigate('CategoryDetailed', {item : breverages1})}>
-                            <Text style={{color : 'white'}}>View All</Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={styles.CatView}>
-                        {breverages.slice(0,6)}
+                        {breverages}
                     </View>
                     <View style={styles.head}>
                         <Text style={styles.CatHead}>Home Care</Text>
-                        <TouchableOpacity style={styles.seeAll} onPress={()=>navigation.navigate('CategoryDetailed', {item : homecare1})}>
-                            <Text style={{color : 'white'}}>View All</Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={styles.CatView}>
-                        {homecare.slice(0,6)}
+                        {homecare}
                     </View>
                     <View style={styles.head}>
                         <Text style={styles.CatHead}>Personal Care</Text>
-                        <TouchableOpacity style={styles.seeAll} onPress={()=>navigation.navigate('CategoryDetailed', {item : personalcare1})}>
-                            <Text style={{color : 'white'}}>View All</Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={styles.CatView}>
-                        {personalcare.slice(0,6)}
+                        {personalcare}
+                    </View>
+
+                    <View style={styles.head}>
+                        <Text style={styles.CatHead}>Misclleneous</Text>
+                    </View>
+                    <View style={styles.CatView}>
+                        {misclleneous}
                     </View>
                 </View>
             </View>

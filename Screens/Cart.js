@@ -12,7 +12,6 @@ export default function Cart({navigation}) {
     const [step, setStep] = useState(1);
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isCheckout, setIsCheckout] = useState(false);
     const [user, setUser] = useState();
     useEffect(()=>{
         AsyncStorage.getItem('cart')
@@ -30,7 +29,6 @@ export default function Cart({navigation}) {
     },[])
 
     const handleQuantityChange = (state, i)=>{
-        console.log(state,i)
         if(state === true){
             const temp = [...cart];
             temp[i].quantity = temp[i].quantity+1;
@@ -78,16 +76,15 @@ export default function Cart({navigation}) {
 
     const checkMinOrder = () =>{
         if(calculateTotal()-calculateSavings()>=500){
-            handlePlaceOrder();
+            setStep(2);
         }else{
             Alert.alert('Checkout Error', 'Minimum order should be greater than ₹ 500')
         }
     }
 
     const handlePlaceOrder =()=>{
-        setIsCheckout(true)
+        console.log('hit')
         setLoading(true)
-        if(isCheckout){
         const products =[];
         cart.map((item)=>products.push({
             product_id : item.id,
@@ -117,12 +114,10 @@ export default function Cart({navigation}) {
               AsyncStorage.setItem('cart', JSON.stringify([]))
               Alert.alert('Order Successful', 'Thank You For Your Order')
               setLoading(false)
-              setIsCheckout(false)
             })
             .catch((error) => {
-              alert(error.response)
+              alert(error)
             });
-        }
     }
 
     const handleCartFlush = () => {
@@ -214,7 +209,7 @@ export default function Cart({navigation}) {
             <View style={{alignItems : 'center'}}>
                     <TouchableOpacity style={styles.btn} onPress={()=>{
                         if(cart.length!==0){
-                            setStep(2)
+                            checkMinOrder()
                         }else alert('Cart Empty')
                         }}>
                         <Text style={{fontSize : 20, color : 'white', textAlign : 'center'}}>₹ {calculateTotal()}  </Text>
@@ -268,7 +263,11 @@ export default function Cart({navigation}) {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.btn} onPress={checkMinOrder}>
+                        <View style={[{flexDirection : 'row', justifyContent : 'space-between', padding : 10}, styles.cont]}>
+                            <Text>Cash On Delivery</Text>
+                            <TouchableOpacity style={{backgroundColor : '#62BA03', padding : 8, borderRadius : 10}}></TouchableOpacity>
+                        </View>
+                        <TouchableOpacity style={styles.btn} onPress={()=>handlePlaceOrder()}>
                             <Text style={{color : 'white'}}>Place Order</Text>
                         </TouchableOpacity>
                     </View>

@@ -10,8 +10,9 @@ export default function MyOrders({navigation}) {
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        AsyncStorage.getItem('user')
-        .then((userdata)=>{
+        const unsubscribe = navigation.addListener('focus', () => {
+            AsyncStorage.getItem('user')
+            .then((userdata)=>{
             const data = JSON.parse(userdata)
             console.log(data.id)
             WooCommerce.get("orders",{
@@ -24,8 +25,10 @@ export default function MyOrders({navigation}) {
             .catch((error) => {
                 console.log(error.response.data);
             });
-        })
-    }, [])
+            })
+          });
+        return unsubscribe
+    }, [navigation])
 
     const identifyStatus = ({item}) =>{
         if(item.status === 'pending' || item.status==='on-hold') return <Text style={[styles.btn, {backgroundColor : 'orange'}]}>{item.status}</Text>

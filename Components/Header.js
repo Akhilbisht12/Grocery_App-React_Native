@@ -45,7 +45,7 @@ const styles= StyleSheet.create({
     },
     icon : {
         color : 'white',
-        fontSize : 25
+        fontSize : 30
     },
     logo : {
         color : 'white',

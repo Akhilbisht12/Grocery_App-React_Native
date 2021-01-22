@@ -12,7 +12,7 @@ import CatProducts from '../Screens/CatProducts';
 import SingleOrder from "../Screens/SingleOrder";
 import Search from "../Screens/Search";
 import MyOrders from "../Screens/MyOrders";
-import CategoryDetailed from "../Screens/CategoryDetailed";
+import BrandScreen from '../Screens/BrandScreen'
 
 const data = {
   screenOne : {
@@ -59,17 +59,18 @@ function ScreenOne(){
 
 export default function StackNavigator() {
   const [ loading, setLoading] = useState(true)
-const Stack = createStackNavigator();
-const [initialRoute, setInitialRoute] = useState('');
-useEffect(()=>{
-  AsyncStorage.getItem('user')
-  .then((data)=>{
-    const user = JSON.parse(data)
-    if(user){setInitialRoute('Home')}
-    else{setInitialRoute('Signup')}
-    setLoading(false);
-  })
-},[])
+  const Stack = createStackNavigator();
+  const [initialRoute, setInitialRoute] = useState('');
+  useEffect(()=>{
+    AsyncStorage.getItem('user')
+    .then((data)=>{
+      var user = JSON.parse(data)
+      console.log(user)
+      if(user===null || user.length===0 || user===undefined){setInitialRoute('Login')}
+      else{setInitialRoute('Home')}
+      setLoading(false);
+    })
+  },[])
 
 if(loading) return<ActivityIndicator/>
 else{
@@ -87,7 +88,7 @@ else{
         <Stack.Screen name="SingleOrder" component={SingleOrder} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="MyOrders" component={MyOrders} />
-        <Stack.Screen name="CategoryDetailed" component={CategoryDetailed} />
+        <Stack.Screen name="BrandScreen" component={BrandScreen} />
       </Stack.Navigator>
     )
   }

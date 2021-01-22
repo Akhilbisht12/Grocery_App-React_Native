@@ -8,7 +8,7 @@ const { height, width}= Dimensions.get('window')
 export default function Category({url,title}) {
     return (
         <View style={styles.main}>
-            <Image style={{height : height*0.1, width : width*0.19}}
+            <Image style={{height : height*0.1+10, width : width*0.19+10}}
                     source={{uri : url}}/>
             <Text style={{textAlign : 'center'}}>{title}</Text>
         </View>
@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
         borderColor : 'rgba(140, 212, 63,0.4)',
         borderRadius : 10,
         margin : 2,
-        height : Dimensions.get('window').height*0.145
+        height : Dimensions.get('window').height*0.145 +30,
+        paddingVertical : 10,
+        justifyContent : 'center'
     }
 })

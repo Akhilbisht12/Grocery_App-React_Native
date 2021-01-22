@@ -134,7 +134,7 @@ export default function MyAccount({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    textBox :{
+    textBox : {
         flexDirection : 'row',
         alignItems : 'center',
         justifyContent : "space-between",

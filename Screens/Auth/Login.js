@@ -21,9 +21,11 @@ export default function Login({navigation}) {
         console.log(response);
         if(response.length === 0){
             alert('No User Found')
+            setLoading(false)
         }else if(response.data){
             if(response.data.status === 400){
                 alert('Invalid Email')
+                setLoading(false)
             }
         }else if(response[0].billing.company){
             if(response[0].billing.company === password){
@@ -33,8 +35,10 @@ export default function Login({navigation}) {
                         navigation.navigate('Home');
                     })
                 })
+                setLoading(false)
             }else{
                 alert('Invalid Password')
+                setLoading(false)
             }
         }
         })

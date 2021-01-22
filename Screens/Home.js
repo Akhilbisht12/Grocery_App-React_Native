@@ -4,7 +4,9 @@ import Header from '../Components/Header';
 import ProductShow from '../Components/ProductShow'
 import { useNavigation } from '@react-navigation/native';
 import CategoryComp from '../Components/CategoryComp';
-import FlatCarousel from '../Components/FlatCarousel'
+import FlatCarousel from '../Components/FlatCarousel';
+import Brands from '../Components/Brands'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const { height, width}= Dimensions.get('window')
 
 export default function Home() {
@@ -21,6 +23,7 @@ export default function Home() {
                 <Text style={{fontSize : 25, fontWeight : 'bold', paddingHorizontal : 10, marginTop : 20}}>Popular Products</Text>
                 <View style={styles.productGrid}>
                     <ProductShow/>
+                    <Brands/>
                 </View>
                 </ScrollView>
             </SafeAreaView>
@@ -41,8 +44,8 @@ const styles= StyleSheet.create({
         flexWrap : 'wrap',
         flexDirection : 'row',
         alignItems : 'center',
-        marginBottom : 300,
-        justifyContent : 'center'
+        justifyContent : 'center',
+        marginBottom : 200
     },
     cat : {
         alignItems : 'center',

@@ -7,6 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const {height, width} = Dimensions.get('window')
 
 export default function ProductComp({item, image}) {
+    var i = image.split('.')
+    var img = i[0]+'.'+i[1]+'.'+i[2]+'-150x150.'+i[3]
     const[disabled, setDisabled] = useState(false)
     const [color, setColor] = useState('#62BA03')
     const AddToCartFunction = () =>{
@@ -141,7 +143,7 @@ export default function ProductComp({item, image}) {
         <SafeAreaView>
             <View style={styles.main}>
                 <View style={styles.imageCont}>
-                    <Image style={styles.image} source={{uri : image}}/>
+                    <Image style={styles.image} source={{uri : img}}/>
                 </View>
                     <Text style={styles.offer}>{calculateDiscount()}</Text>
                     <Text style={styles.name}>{item.name}</Text>
