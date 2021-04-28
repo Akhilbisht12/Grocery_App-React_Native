@@ -1,35 +1,48 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { View, Text, Dimensions } from 'react-native'
 import {FlatListSlider} from 'react-native-flatlist-slider';
+import WooCommerce from '../Components/WooCommerce';
+import HeaderLoader from '../Loaders/HeaderLoader'
 
 const {width} = Dimensions.get('window')
 
 export default function FlatCarousel() {
-    const DATA = [
-        {
-          id: '1',
-          url: 'https://gms.upgrate.in/wp-content/uploads/h1.jpg',
-        },
-        {
-          id: '2',
-          url: 'https://gms.upgrate.in/wp-content/uploads/h2.jpg',
-        },
-        {
-          id: '3',
-          url: 'https://gms.upgrate.in/wp-content/uploads/h3.jpg',
-        },
-        {
-          id: '4',
-          url: 'https://gms.upgrate.in/wp-content/uploads/h4.jpg',
-        }
-      ];
-    return (
+      const [loading, setLoading] = useState(true);
+      const [images, setImages] = useState([])
+      useEffect(()=>{
+          WooCommerce.get("products/categories",{
+              parent : 60
+          })
+          .then((response) => {
+              response.map((item,i)=>{
+                const data = images
+                data.push({
+                  id : item.id,
+                  url : item.image.src
+                })
+                setImages(data)
+                if(i===response.length-1){
+                  setTimeout(() => {
+                    setLoading(false)
+                  }, 1000);
+                }
+              })
+          })
+          .catch((error) => {
+              console.log(error.response);
+          });
+      },[])
+
+      if(loading) return <HeaderLoader/>
+      else{
+        return (
           <FlatListSlider
-            data={DATA}
+            data={images}
             imageKey={'url'}
             timer={5000}
             height={width*0.5}
             onPress={()=>{}}
           />
-    )
+        )
+      }
 }

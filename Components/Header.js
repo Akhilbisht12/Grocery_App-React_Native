@@ -14,7 +14,7 @@ export default function Header() {
                     <TouchableOpacity onPress={()=>navigation.openDrawer()}>
                         <Icon style={styles.icon} name='bars'/>
                     </TouchableOpacity>
-                    <Text style={styles.logo}>Ganesh Supermarket</Text>
+                    <Text style={styles.logo}>Grocers</Text>
                 </View>
                 <TouchableOpacity onPress={()=>navigation.navigate('Cart')}>
                     <Icon style={styles.icon} name='opencart'/>
@@ -23,7 +23,7 @@ export default function Header() {
             <TouchableOpacity onPress={()=>navigation.navigate('Search')}>
             <View style={styles.parentSearch}>
                 <View style={styles.searchBox}>
-                    <Text style={{paddingLeft : 5, color : 'grey'}}>Find Something</Text>
+                    <Text style={{paddingLeft : 5, color : 'grey'}}>Explore Products</Text>
                     <View style={styles.searchIcon}>
                         <Icon color='white' size={20} name='search'/>
                     </View>

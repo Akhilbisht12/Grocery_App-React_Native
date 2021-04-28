@@ -21,20 +21,20 @@ export default function CustomDrawer(props) {
                     <View>
                         <View style={styles.userPanel}>
                             <View style={styles.avatarView}>
-                                <Image style={styles.avatar} source={{uri : 'http://gms.upgrate.in/wp-content/uploads/2020/12/Ganesh-Logo-01.png'}}/>
+                                <Image style={styles.avatar} source={require('../assets/icon.png')}/>
                             </View>
-                            <Text style={styles.username}>Ganesh Supermarket</Text>
+                            <Text style={styles.username}>Grocers</Text>
                             <View style={{flexDirection : 'row', marginVertical : 5}}>
-                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL('https://www.instagram.com/ganeshsupermarket2021/')}>
+                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL('https://www.instagram.com/upgrate.in/')}>
                                     <Icon name='instagram' color='white' size={20}/>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL('https://www.facebook.com/ganeshsuparmarket')}>
+                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL('https://www.facebook.com/upgrate.in')}>
                                     <Icon name='facebook-square' color='white' size={20}/>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL('https://wa.me/message/67NDYDEBQW5NO1')}>
+                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL('https://wa.me/+918979877325')}>
                                     <Icon name='whatsapp' color='white' size={20}/>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL(`tel:${9084833077}`)}>
+                                <TouchableOpacity style={{marginHorizontal : 10}} onPress={()=>Linking.openURL(`tel:${8979877325}`)}>
                                     <Icon name='phone' color='white' size={20}/>
                                 </TouchableOpacity>
                             </View>
@@ -92,7 +92,8 @@ export default function CustomDrawer(props) {
 const styles = StyleSheet.create({
     avatar : {
         height : 60,
-        width : 60
+        width : 60,
+        borderRadius : 50
     },
     avatarView : {
        

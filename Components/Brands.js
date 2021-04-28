@@ -7,77 +7,77 @@ const data = [
     {
         id : 1,
         name : 'Amul',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/1.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/1-150x150.png'
     },
     {
         id : 2,
         name : 'dal',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2020/12/Ganesh-Logo-01.png'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/2-1-150x150.png'
     },
     {
         id : 3,
         name : 'dabur',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/3.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/3-150x150.png'
     },
     {
         id : 4,
         name : 'catch',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/4.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/4-150x150.png'
     },
     {
         id : 5,
         name : 'act II',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/5.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/5-150x150.png'
     },
     {
         id : 6,
         name : 'haldiram',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/6.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/6-150x150.png'
     },
     {
         id : 7,
         name : 'johnson',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/7.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/7-150x150.png'
     },
     {
         id : 8,
         name : 'patanjali',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/8.png'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/8-150x150.png'
     },
     {
         id : 9,
         name : 'britania',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/9.png'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/9-150x150.png'
     },
     {
         id : 10,
         name : 'parle',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/10.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/10-150x150.png'
     },
     {
         id : 11,
         name : 'bambino',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/11.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/11-150x150.png'
     },
     {
         id : 12,
         name : 'cadbury',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/12.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/12-150x150.png'
     },
     {
         id : 13,
         name : 'cremica',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/13.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/13-150x150.png'
     },
     {
         id : 14,
         name : 'himalaya',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/14.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/14-150x150.png'
     },
     {
         id : 15,
         name : 'dettol',
-        img : 'http://gms.upgrate.in/wp-content/uploads/2021/01/15.jpg'
+        img : 'http://grocers.upgrate.in/wp-content/uploads/2021/04/15-150x150.png'
     }
 ];
 
@@ -91,7 +91,7 @@ export default function Brands() {
                     return(
                         <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('BrandScreen', {item})}>
                             <View style={styles.box} key={item.id}>
-                                <Image style={{width : width*0.28, height : height*0.14, resizeMode : 'contain'}} source={{uri : item.img}}/>
+                                <Image style={{width : width*0.28, height : height*0.14, resizeMode : 'contain', objectFit : 'contain'}} source={{uri : item.img}}/>
                             </View>
                         </TouchableOpacity>
                     )

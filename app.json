@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Ganesh Supermarket",
-    "slug": "ganesh-supermarket",
-    "version": "2.0.0",
+    "name": "Grocers",
+    "slug": "grocers",
+    "version": "2.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,6 +20,7 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

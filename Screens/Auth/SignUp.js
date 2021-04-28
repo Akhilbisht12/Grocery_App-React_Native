@@ -54,6 +54,8 @@ import Loader from '../../Components/Loader';
           
           WooCommerce.post("customers", data)
             .then((response) => {
+                console.log(data)
+                console.log(response, response.data)
               AsyncStorage.setItem('user', JSON.stringify(response));
               AsyncStorage.setItem('cart', JSON.stringify([]));
               navigation.navigate('ScreenOne');

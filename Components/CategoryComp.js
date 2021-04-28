@@ -44,12 +44,12 @@ export default function CategoryComp() {
                    }else{
                        var i = 'http://gms.upgrate.in/wp-content/uploads/2020/12/Pulses-1.jpg'
                    }
-                    if(item.parent === 65){
+                    if(item.parent === 16){
                         food.push(
                         <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
                         </TouchableOpacity>)
-                    }else if(item.parent === 85){
+                    }else if(item.parent === 33){
                         breverages.push(
                         <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
@@ -59,7 +59,7 @@ export default function CategoryComp() {
                         <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
                         </TouchableOpacity>)
-                    }else if(item.parent === 95){
+                    }else if(item.parent === 20){
                         personalcare.push(
                         <TouchableOpacity key={item.id} onPress={()=>navigation.navigate('CatProducts', {item})}>
                             <Category url={i[0]+'.'+i[1]+'.'+i[2]+'-100x100.jpg'} title={item.name}/>
@@ -84,12 +84,12 @@ export default function CategoryComp() {
                     <View style={styles.CatView}>
                         {breverages}
                     </View>
-                    <View style={styles.head}>
+                    {/* <View style={styles.head}>
                         <Text style={styles.CatHead}>Home Care</Text>
                     </View>
                     <View style={styles.CatView}>
                         {homecare}
-                    </View>
+                    </View> */}
                     <View style={styles.head}>
                         <Text style={styles.CatHead}>Personal Care</Text>
                     </View>
@@ -97,12 +97,12 @@ export default function CategoryComp() {
                         {personalcare}
                     </View>
 
-                    <View style={styles.head}>
+                    {/* <View style={styles.head}>
                         <Text style={styles.CatHead}>Misclleneous</Text>
                     </View>
                     <View style={styles.CatView}>
                         {misclleneous}
-                    </View>
+                    </View> */}
                 </View>
             </View>
         )
